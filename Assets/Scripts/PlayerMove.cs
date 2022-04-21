@@ -23,19 +23,12 @@ public class PlayerMove : MonoBehaviour
         var xMov = Input.GetAxis("Horizontal");
         var yMov = Input.GetAxis("Vertical");
         Vector3 _vector = new Vector3(xMov, 0, yMov);
-        transform.Translate(_vector * MoveSpeed * Time.deltaTime, Camera.main.transform);
-        _vector = Vector3.zero;
-        animator.SetFloat("speed", Vector3.ClampMagnitude(_vector, 1).magnitude);
+        transform.Translate(_vector * MoveSpeed * Time.deltaTime);
         
+        animator.SetFloat("speed", Vector3.ClampMagnitude(_vector, 1).magnitude);
+        _vector = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
 
-        }
     }
 
-    void Jump()
-    {
- 
-    }
 }

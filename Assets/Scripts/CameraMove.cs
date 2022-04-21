@@ -20,7 +20,7 @@ public class CameraMove : MonoBehaviour
         var yRot = Input.GetAxis("Mouse Y");
 
         y -= yRot;
-        y = Mathf.Clamp(y, -80, 70);
+        y = Mathf.Clamp(y, -10, 20);
         
         Playerbody.Rotate(new Vector3(0, xRot * MouseSensetiv, 0));
         transform.localRotation = Quaternion.Euler(y * MouseSensetiv, 0, 0);
