@@ -25,6 +25,7 @@ public class EnamySpawn : MonoBehaviour
         {
             StartCoroutine(SpawnObjects());
             GetComponent<SphereCollider>().enabled = false;
+            StopCoroutine(SpawnObjects());
         }
     }
 

@@ -1,35 +1,36 @@
-using System.Collections;
+using System.Collections; 
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
 public class BulletTurret : MonoBehaviour
 {
-    [SerializeField] private float BulletSpeed;
-    
-    public Vector3 TargetPos
-    {
-        get => _targetPos;
-        set
-        {
-            _isShooted = true;
-            _targetPos = value;
-        }
+    [SerializeField] private float damage = 10;
+    [SerializeField] private float bulledSpeed = 5;
+    private LayerMask layer;
 
-    }
-    private bool _isShooted = false;
-    private Vector3 _targetPos;
-
-    // Update is called once per frame
-    void Update()
+    public void SetBullet(LayerMask layerMask, Vector3 direction)
     {
-        if (_isShooted)
+        layer = layerMask;
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.useGravity = false;
+        body.velocity = direction * bulledSpeed;
+        transform.forward = direction;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.isTrigger)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _targetPos, BulletSpeed * Time.deltaTime);
-           
+            if(((1 << other.gameObject.layer) & layer) != 0)
+            {
+                other.GetComponent<UnitHP>().Adjust(-damage);
+            }
+            Destroy(gameObject);
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
