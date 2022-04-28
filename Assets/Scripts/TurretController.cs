@@ -39,7 +39,7 @@ public class TurretController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(CheckLayerMask(other.gameObject, layerMask))
+        if (CheckLayerMask(other.gameObject, layerMask))
         {
             target = other.transform;
             turretTrigger.enabled = false;
@@ -80,7 +80,7 @@ public class TurretController : MonoBehaviour
         if (rayOffset < 0) rayOffset = 0;
         float dist = Vector3.Distance(transform.position + offset, target.position);
         Vector3 lookPos = target.position - turretRotation.position;
-        Debug.DrawRay(turretRotation.position, center.forward * (turretTrigger.radius + rayOffset));
+        Debug.DrawRay(turretRotation.position, center.forward * (turretTrigger.radius + rayOffset), Color.red);
         Vector3 rotation = Quaternion.Lerp(turretRotation.rotation, Quaternion.LookRotation(lookPos), smooth * Time.deltaTime).eulerAngles;
 
         if (useLimits)
@@ -132,7 +132,7 @@ public class TurretController : MonoBehaviour
 
             if(bulletPrefab != null)
             {
-                BulletTurret bullet = Instantiate(bulletPrefab, point.position, Quaternion.identity) as BulletTurret;
+                BulletTurret bullet = Instantiate(bulletPrefab, point.position, Quaternion.identity);
                 bullet.SetBullet(layerMask, point.forward);
             }
             else if (IsRaycastHit(point))

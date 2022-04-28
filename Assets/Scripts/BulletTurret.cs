@@ -1,14 +1,14 @@
-using System.Collections; 
-using System.Collections.Generic;
 using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody))]
 public class BulletTurret : MonoBehaviour
 {
+
     [SerializeField] private float damage = 10;
     [SerializeField] private float bulledSpeed = 5;
     private LayerMask layer;
+    private bool isActive = true;
 
     public void SetBullet(LayerMask layerMask, Vector3 direction)
     {
@@ -19,21 +19,37 @@ public class BulletTurret : MonoBehaviour
         transform.forward = direction;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.isTrigger)
-        {
-            if(((1 << other.gameObject.layer) & layer) != 0)
-            {
-                other.GetComponent<UnitHP>().Adjust(-damage);
-            }
-            Destroy(gameObject);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!other.isTrigger)
+    //    {
+
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isActive) return;
+        isActive = false;
+
+        
+        UnitHP unitHP = collision.gameObject.GetComponent<UnitHP>();
         Destroy(gameObject);
+        if (unitHP != null)
+        {
+            unitHP.Adjust(damage);
+            Debug.Log(collision.gameObject.name);
+            Debug.Log(unitHP.health);
+            
+        }
+        //GetComponent<UnitHP>().Adjust(-damage);
+        
+        
+        //if (((1 << gameObject.layer) & layer) != 0)
+        //{
+        //}
+
+        
     }
 
 }
