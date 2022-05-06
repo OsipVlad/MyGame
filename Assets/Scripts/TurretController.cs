@@ -19,6 +19,11 @@ public class TurretController : MonoBehaviour
     [SerializeField] private bool useLimits;
     [SerializeField][Range(0, 180)] private float limitX = 50;
     [SerializeField][Range(0, 180)] private float limitY = 30;
+
+    public AudioClip shotSFX;
+    public AudioSource _audioSource;
+
+
     private SphereCollider turretTrigger;
     private Transform target;
     private Vector3 offset;
@@ -124,6 +129,8 @@ public class TurretController : MonoBehaviour
     {
         if(!Search()) return;
 
+        
+
         curFireRate += Time.deltaTime;
         if(curFireRate > fireRate)
         {
@@ -132,6 +139,7 @@ public class TurretController : MonoBehaviour
 
             if(bulletPrefab != null)
             {
+                _audioSource.PlayOneShot(shotSFX);
                 BulletTurret bullet = Instantiate(bulletPrefab, point.position, Quaternion.identity);
                 bullet.SetBullet(layerMask, point.forward);
             }

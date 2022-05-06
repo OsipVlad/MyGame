@@ -26,11 +26,12 @@ public class PlayerMove : MonoBehaviour
         var xMov = Input.GetAxis("Horizontal");
         var yMov = Input.GetAxis("Vertical");
         Vector3 _vector = new Vector3(xMov, 0, yMov);
+        transform.Translate(_vector * MoveSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.LeftShift))
         {
             transform.Translate(_vector * MoveRunSpeed * Time.deltaTime);
         }
-        transform.Translate(_vector * MoveSpeed * Time.deltaTime);
+        
         
         //animator.SetFloat("speed", Vector3.ClampMagnitude(_vector, 1).magnitude);
         _vector = Vector3.zero;
