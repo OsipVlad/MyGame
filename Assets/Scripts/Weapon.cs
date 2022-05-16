@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     public Camera _cam;
     public Transform bulletSpawn;
     private float nextFire = 0;
-    public GameObject hitEffect, hitEffect_2;
+    //public GameObject hitEffect, hitEffect_2;
 
     // Start is called before the first frame update
     void Start()
@@ -48,8 +48,8 @@ public class Weapon : MonoBehaviour
 
             if (hit.rigidbody != null)
             {
-                GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(impact, 2f);
+                //GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(impact, 2f);
 
                 hit.rigidbody.AddForce(-hit.normal * force);
                 UnitHP unitHP = hit.collider.GetComponent<UnitHP>();
@@ -57,11 +57,11 @@ public class Weapon : MonoBehaviour
 
                 Debug.Log(unitHP.health);
             }
-            else
-            {
-                GameObject impact_2 = Instantiate(hitEffect_2, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(impact_2, 2f);
-            }
+            //else
+            //{
+                //GameObject impact_2 = Instantiate(hitEffect_2, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(impact_2, 2f);
+            //}
         }
     }
 }

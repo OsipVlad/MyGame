@@ -9,18 +9,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float MoveSpeed = 1f;
     [SerializeField] float MoveRunSpeed = 2f;
     [SerializeField] float jumpPower = 200f;
-    public bool ground;
-    public Rigidbody rb;
-    
-    // Start is called before the first frame update
-    void Start()
-    { 
 
+    public bool ground = true;
+    public Rigidbody rb;
+
+    private CapsuleCollider _player;
+    void Start()
+    {
+        _player = GetComponent<CapsuleCollider>();
+       
         //animator = GetComponent<Animator>();
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         var xMov = Input.GetAxis("Horizontal");
@@ -45,7 +46,24 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if(ground == true)
+            {
+                _player.height = 1.4f;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            if (ground == true)
+            {
+                _player.height = 1.8f;
+            }
+        }
+
+
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,14 +73,4 @@ public class PlayerMove : MonoBehaviour
             
         }
     }
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        ground = false;
-            
-
-    //    }
-    //}
-
 }

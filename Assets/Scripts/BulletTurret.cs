@@ -19,13 +19,7 @@ public class BulletTurret : MonoBehaviour
         transform.forward = direction;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (!other.isTrigger)
-    //    {
-
-    //    }
-    //}
+ 
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -42,14 +36,7 @@ public class BulletTurret : MonoBehaviour
             Debug.Log(unitHP.health);
             
         }
-        //GetComponent<UnitHP>().Adjust(-damage);
-        
-        
-        //if (((1 << gameObject.layer) & layer) != 0)
-        //{
-        //}
-
-        
+     
     }
 
 }
