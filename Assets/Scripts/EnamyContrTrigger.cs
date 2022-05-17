@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,28 +7,31 @@ public class EnamyContrTrigger : MonoBehaviour
 {
     [SerializeField] Transform PlayerPos;
     private NavMeshAgent _agent;
-
+    public AudioClip shotSFX;
+    public AudioSource _audioSource;
+    public float growlRate = 1;
+    private float nextGrowl = 0;
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+
             _agent.destination = PlayerPos.position;
+            while (Time.time > nextGrowl)
+            {
+
+                nextGrowl = Time.time + 1f / growlRate;
+                _audioSource.PlayOneShot(shotSFX);
+            }
+
             GetComponent<SphereCollider>().enabled = false;
         }
     }
-    void Update()
-    {
-        
-    }
+
+   
 }

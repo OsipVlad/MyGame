@@ -21,7 +21,6 @@ public class DoorTrigger : MonoBehaviour
         {
             
             animator.SetBool("Open", true);
-            new WaitForSecondsRealtime(1);
             _audioSource.PlayOneShot(_openDoor);
 
         }
@@ -32,7 +31,6 @@ public class DoorTrigger : MonoBehaviour
         
 
         animator.SetBool("Open", false);
-        new WaitForSecondsRealtime(1);
         _audioSource.PlayOneShot(_closeDoor);
     }
 }

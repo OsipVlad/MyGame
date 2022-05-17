@@ -26,17 +26,25 @@ public class BulletTurret : MonoBehaviour
         if (!isActive) return;
         isActive = false;
 
-        
+        PlayerHP playerHP = collision.gameObject.GetComponent<PlayerHP>();
+        if (playerHP != null)
+        {
+            playerHP.Adjust(damage);
+
+            Debug.Log(collision.gameObject.name);
+
+        }
         UnitHP unitHP = collision.gameObject.GetComponent<UnitHP>();
-        Destroy(gameObject);
+        
         if (unitHP != null)
         {
             unitHP.Adjust(damage);
+           
             Debug.Log(collision.gameObject.name);
             Debug.Log(unitHP.health);
             
         }
-     
+        Destroy(gameObject);
     }
 
 }

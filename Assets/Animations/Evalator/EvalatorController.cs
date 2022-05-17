@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EvalatorController : MonoBehaviour
 {
     private Animator animator;
     public AudioClip _StartGo;
-    public AudioClip _FinalGo;
     public AudioSource _audioSource;
 
     void Start()
@@ -18,12 +15,12 @@ public class EvalatorController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F))
         {
-            //_audioSource.PlayOneShot(_FinalGo);
+            
             animator.SetBool("Up_Down", !animator.GetBool("Up_Down"));
             
-            //_audioSource.PlayOneShot(_StartGo);
+            _audioSource.PlayOneShot(_StartGo);
         }
     }
 
