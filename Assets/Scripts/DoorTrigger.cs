@@ -17,7 +17,7 @@ public class DoorTrigger : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.E))
         {
             
             animator.SetBool("Open", true);

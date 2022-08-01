@@ -23,6 +23,7 @@ public class TurretController : MonoBehaviour
     public AudioClip shotSFX;
     public AudioSource _audioSource;
 
+    public ParticleSystem muzzleFlash;
 
     private SphereCollider turretTrigger;
     private Transform target;
@@ -134,11 +135,13 @@ public class TurretController : MonoBehaviour
         curFireRate += Time.deltaTime;
         if(curFireRate > fireRate)
         {
+            muzzleFlash.Play();
             Transform point = GetPoint();
             curFireRate = 0;
-
-            if(bulletPrefab != null)
+            
+            if (bulletPrefab != null)
             {
+                muzzleFlash.Play();
                 _audioSource.PlayOneShot(shotSFX);
                 BulletTurret bullet = Instantiate(bulletPrefab, point.position, Quaternion.identity);
                 bullet.SetBullet(layerMask, point.forward);

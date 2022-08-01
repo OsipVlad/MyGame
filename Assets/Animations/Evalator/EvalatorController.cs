@@ -15,7 +15,7 @@ public class EvalatorController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             
             animator.SetBool("Up_Down", !animator.GetBool("Up_Down"));
